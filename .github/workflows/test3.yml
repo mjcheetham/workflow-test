@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Update winget repository
-      uses: mjcheetham/update-winget@v0.8
+      uses: mjcheetham/update-winget@v1.0
       with:
         token: ${{ secrets.WINGET_TOKEN }}
         repo: mjcheetham/winpkg-test
