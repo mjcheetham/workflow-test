@@ -1,0 +1,30 @@
+name: test3
+on:
+  release:
+    types: [released]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update winget repository
+      uses: mjcheetham/update-winget@v0.7
+      with:
+        token: ${{ secrets.WINGET_TOKEN }}
+        repo: mjcheetham/winpkg-test
+        id: CompanyName.ProductName
+        releaseAsset: test-(.*)\.exe
+        manifestText: |
+          Id: {{id}}
+          Version: {{version.major_minor_patch}}
+          Name: Test Product
+          Publisher: Test Publisher
+          Homepage: https://example.com/test
+          License: Copyright (C) Test Company
+          Description: The test product description.
+          Installers:
+              - Arch: x86
+                Url: {{url}}
+                InstallerType: Inno
+                Sha256: {{sha256}}
+        alwaysUsePullRequest: true
